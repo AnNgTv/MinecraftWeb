@@ -16,11 +16,11 @@
                 <i class="fas fa-bars"></i>
             </div>
             <ul class="nav-links">
-                <li><a href="index.html">Trang Chủ</a></li>
+                <li><a href="#hero">Trang Chủ</a></li>
                 <li><a href="#news">Tin Tức</a></li>
                 <li><a href="#store">Cửa Hàng</a></li>
-                <li><a href="topup.html" class="nav-topup">Nạp Thẻ</a></li>
-                <li><a href="top-nap.html">Top Nạp</a></li>
+                <li><a href="#topup" class="nav-topup">Nạp Thẻ</a></li>
+                <li><a href="#leaderboard">Top Nạp</a></li>
                 <li><a href="#staff">Đội Ngũ</a></li>
                 <li><a href="#contact">Liên Hệ</a></li>
             </ul>
@@ -28,7 +28,7 @@
     </header>
 
     <main>
-        <section class="hero">
+        <section id="hero" class="hero">
             <div class="hero-content">
                 <h1>Chào mừng đến với <br><span>Thế Giới Minecraft</span></h1>
                 <p>Khám phá vùng đất mới, xây dựng đế chế của riêng bạn và chiến đấu cùng bạn bè.</p>
@@ -132,7 +132,7 @@
                         <li><i class="fas fa-check"></i> Quyền bay lượn (/fly)</li>
                         <li><i class="fas fa-check"></i> Kit VIP hàng tuần</li>
                     </ul>
-                    <button class="buy-btn">Mua Ngay</button>
+                    <a href="#topup" class="buy-btn" style="text-decoration: none; display: inline-block;">Mua Ngay</a>
                 </div>
                 <div class="store-card premium">
                     <div class="rank-badge">MVP</div>
@@ -144,15 +144,77 @@
                         <li><i class="fas fa-check"></i> Truy cập Server Full</li>
                         <li><i class="fas fa-check"></i> Giảm 10% các gói khác</li>
                     </ul>
-                    <button class="buy-btn">Mua Ngay</button>
+                    <a href="#topup" class="buy-btn" style="text-decoration: none; display: inline-block;">Mua Ngay</a>
                 </div>
                 <div class="store-card">
                     <div class="rank-badge">COINS</div>
                     <h3>1.000 Coins</h3>
                     <p class="price">20.000đ</p>
                     <p>Dùng để mua vật phẩm trong game, nâng cấp kỹ năng.</p>
-                    <button class="buy-btn">Mua Ngay</button>
+                    <a href="#topup" class="buy-btn" style="text-decoration: none; display: inline-block;">Mua Ngay</a>
                 </div>
+            </div>
+        </section>
+
+        <!-- Nạp Thẻ Section -->
+        <section id="topup" class="topup-section" style="background: #1a1a1a;">
+            <h2 class="section-title">Nạp Tiền <span>Hệ Thống</span></h2>
+            <div class="topup-grid">
+                <div class="topup-box">
+                    <h3><i class="fas fa-university"></i> Chuyển Khoản</h3>
+                    <div class="bank-info">
+                        <p><strong>Ngân hàng:</strong> MB BANK</p>
+                        <p><strong>Số TK:</strong> 0935420269</p>
+                        <p><strong>Chủ TK:</strong> NGUYEN VAN AN</p>
+                        <p><strong>Nội dung:</strong> <span style="color: #4CAF50;">NAP [Ten_In_Game]</span></p>
+                    </div>
+                    <div style="text-align: center; margin-top: 20px;">
+                        <img src="https://img.vietqr.io/image/MB-0935420269-compact2.png?accountName=NGUYEN%20VAN%20AN&addInfo=NAP%20TEN_CUA_BAN" alt="QR" style="width: 180px; border-radius: 10px; border: 4px solid #fff;">
+                    </div>
+                </div>
+                <div class="topup-box">
+                    <h3><i class="fas fa-credit-card"></i> Nạp Thẻ Cào</h3>
+                    <form class="topup-form" id="topupCardForm">
+                        <input type="text" id="username" placeholder="Tên tài khoản trong game" required>
+                        <select id="cardType" required>
+                            <option value="">-- Loại thẻ --</option>
+                            <option value="viettel">Viettel</option>
+                            <option value="mobifone">Mobifone</option>
+                            <option value="vinaphone">Vinaphone</option>
+                        </select>
+                        <select id="cardAmount" required>
+                            <option value="">-- Mệnh giá --</option>
+                            <option value="20000">20.000đ</option>
+                            <option value="50000">50.000đ</option>
+                            <option value="100000">100.000đ</option>
+                            <option value="200000">200.000đ</option>
+                            <option value="500000">500.000đ</option>
+                        </select>
+                        <input type="text" id="cardCode" placeholder="Mã số thẻ" required>
+                        <input type="text" id="cardSeri" placeholder="Số seri" required>
+                        <button type="submit" class="buy-btn">Gửi Thẻ Ngay</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bảng Xếp Hạng Section -->
+        <section id="leaderboard" class="top-nap-section">
+            <h2 class="section-title">Bảng Xếp Hạng <span>Đại Gia</span></h2>
+            <div class="leaderboard-container">
+                <table class="leaderboard-table">
+                    <thead>
+                        <tr>
+                            <th>Hạng</th>
+                            <th>Người Chơi</th>
+                            <th>Số Tiền</th>
+                            <th>Danh Hiệu</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leaderboard-body">
+                        <tr><td colspan="4" style="text-align: center; padding: 40px;">Đang tải dữ liệu...</td></tr>
+                    </tbody>
+                </table>
             </div>
         </section>
 
@@ -247,5 +309,96 @@
     <button id="back-to-top" title="Lên đầu trang"><i class="fas fa-chevron-up"></i></button>
 
     <script src="assets/js/main.js"></script>
+    <script>
+        // --- CẤU HÌNH API ---
+        const API_BASE = 'https://YOUR_NEW_LINK.serveousercontent.com'; 
+
+        // 1. XỬ LÝ NẠP THẺ CÀO
+        const topupForm = document.getElementById('topupCardForm');
+        if (topupForm) {
+            topupForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const btn = e.target.querySelector('button');
+                const originalText = btn.innerText;
+                
+                btn.innerText = 'Đang xử lý...';
+                btn.disabled = true;
+
+                try {
+                    const response = await fetch(`${API_BASE}/api/card-recharge`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            user: document.getElementById('username').value,
+                            type: document.getElementById('cardType').value,
+                            amount: document.getElementById('cardAmount').value,
+                            code: document.getElementById('cardCode').value,
+                            seri: document.getElementById('cardSeri').value
+                        })
+                    });
+                    const result = await response.json();
+                    alert(result.message);
+                    if (result.status === 'success') topupForm.reset();
+                } catch (err) {
+                    alert('Lỗi: Không thể kết nối đến máy chủ nạp tiền!');
+                } finally {
+                    btn.innerText = originalText;
+                    btn.disabled = false;
+                }
+            });
+        }
+
+        // 2. TẢI BẢNG XẾP HẠNG (TOP NẠP)
+        async function loadLeaderboard() {
+            const tbody = document.getElementById('leaderboard-body');
+            if (!tbody) return;
+
+            try {
+                const response = await fetch(`${API_BASE}/api/top-recharge`);
+                const data = await response.json();
+                
+                tbody.innerHTML = '';
+                if (data.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 20px;">Chưa có dữ liệu nạp thẻ.</td></tr>';
+                    return;
+                }
+
+                data.forEach((item, index) => {
+                    const rank = index + 1;
+                    let rankDisplay = rank;
+                    let rowClass = '';
+                    let badge = '-';
+
+                    if (rank === 1) {
+                        rankDisplay = '<i class="fas fa-medal" style="color: #ffd700;"></i> 1';
+                        rowClass = 'top-1';
+                        badge = '<span class="badge gold">Chúa Tể Đồ Sơn</span>';
+                    } else if (rank === 2) {
+                        rankDisplay = '<i class="fas fa-medal" style="color: #c0c0c0;"></i> 2';
+                        rowClass = 'top-2';
+                        badge = '<span class="badge silver">Đại Phú Hộ</span>';
+                    } else if (rank === 3) {
+                        rankDisplay = '<i class="fas fa-medal" style="color: #cd7f32;"></i> 3';
+                        rowClass = 'top-3';
+                        badge = '<span class="badge bronze">Thương Gia</span>';
+                    }
+
+                    tbody.innerHTML += `
+                        <tr class="${rowClass}">
+                            <td>${rankDisplay}</td>
+                            <td><div class="player-info"><i class="fas fa-user-circle"></i> ${item.username}</div></td>
+                            <td>${item.total.toLocaleString()}đ</td>
+                            <td>${badge}</td>
+                        </tr>
+                    `;
+                });
+            } catch (error) {
+                tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; color: #ff4d4d; padding: 20px;">Lỗi tải dữ liệu từ máy chủ.</td></tr>';
+            }
+        }
+
+        // Khởi động khi trang load
+        document.addEventListener('DOMContentLoaded', loadLeaderboard);
+    </script>
 </body>
 </html>

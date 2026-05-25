@@ -41,49 +41,17 @@
                         <th>Danh Hiệu</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr class="top-1">
-                        <td><i class="fas fa-medal" style="color: #ffd700;"></i> 1</td>
-                        <td><div class="player-info"><i class="fas fa-user-circle"></i> Player_King</div></td>
-                        <td>2.500.000đ</td>
-                        <td><span class="badge gold">Chúa Tể Đồ Sơn</span></td>
-                    </tr>
-                    <tr class="top-2">
-                        <td><i class="fas fa-medal" style="color: #c0c0c0;"></i> 2</td>
-                        <td><div class="player-info"><i class="fas fa-user-circle"></i> Rich_Kid_99</div></td>
-                        <td>1.800.000đ</td>
-                        <td><span class="badge silver">Đại Phú Hộ</span></td>
-                    </tr>
-                    <tr class="top-3">
-                        <td><i class="fas fa-medal" style="color: #cd7f32;"></i> 3</td>
-                        <td><div class="player-info"><i class="fas fa-user-circle"></i> Miner_Pro</div></td>
-                        <td>1.200.000đ</td>
-                        <td><span class="badge bronze">Thương Gia</span></td>
-                    </tr>
+                <tbody id="leaderboard-body">
+                    <!-- Dữ liệu sẽ được tải từ API -->
                     <tr>
-                        <td>4</td>
-                        <td>User_01</td>
-                        <td>500.000đ</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>User_02</td>
-                        <td>300.000đ</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>User_03</td>
-                        <td>100.000đ</td>
-                        <td>-</td>
+                        <td colspan="4" style="text-align: center; padding: 40px;">Đang tải dữ liệu...</td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
         <div class="top-nap-footer">
-            <p><i class="fas fa-info-circle"></i> Bảng xếp hạng cập nhật tự động mỗi 1 giờ.</p>
+            <p><i class="fas fa-info-circle"></i> Bảng xếp hạng cập nhật tự động mỗi khi có nạp mới.</p>
             <a href="topup.html" class="buy-btn" style="display: inline-block; width: auto; margin-top: 20px; text-decoration: none;">Đua Top Ngay</a>
         </div>
     </main>
@@ -93,5 +61,59 @@
     </footer>
 
     <script src="assets/js/main.js"></script>
+    <script>
+        const API_BASE = 'https://YOUR_NEW_LINK.serveousercontent.com'; // Thay link này
+
+        async function loadLeaderboard() {
+            try {
+                const response = await fetch(`${API_BASE}/api/top-recharge`);
+                const data = await response.json();
+                
+                const tbody = document.getElementById('leaderboard-body');
+                tbody.innerHTML = '';
+
+                if (data.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 20px;">Chưa có dữ liệu nạp thẻ.</td></tr>';
+                    return;
+                }
+
+                data.forEach((item, index) => {
+                    const rank = index + 1;
+                    let rankDisplay = rank;
+                    let rowClass = '';
+                    let badge = '-';
+
+                    if (rank === 1) {
+                        rankDisplay = '<i class="fas fa-medal" style="color: #ffd700;"></i> 1';
+                        rowClass = 'top-1';
+                        badge = '<span class="badge gold">Chúa Tể Đồ Sơn</span>';
+                    } else if (rank === 2) {
+                        rankDisplay = '<i class="fas fa-medal" style="color: #c0c0c0;"></i> 2';
+                        rowClass = 'top-2';
+                        badge = '<span class="badge silver">Đại Phú Hộ</span>';
+                    } else if (rank === 3) {
+                        rankDisplay = '<i class="fas fa-medal" style="color: #cd7f32;"></i> 3';
+                        rowClass = 'top-3';
+                        badge = '<span class="badge bronze">Thương Gia</span>';
+                    }
+
+                    const row = `
+                        <tr class="${rowClass}">
+                            <td>${rankDisplay}</td>
+                            <td><div class="player-info"><i class="fas fa-user-circle"></i> ${item.username}</div></td>
+                            <td>${item.total.toLocaleString()}đ</td>
+                            <td>${badge}</td>
+                        </tr>
+                    `;
+                    tbody.innerHTML += row;
+                });
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('leaderboard-body').innerHTML = '<tr><td colspan="4" style="text-align: center; color: #ff4d4d; padding: 20px;">Không thể tải dữ liệu từ máy chủ.</td></tr>';
+            }
+        }
+
+        loadLeaderboard();
+    </script>
 </body>
 </html>
