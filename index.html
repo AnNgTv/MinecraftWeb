@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Server | Cổng Game Đỉnh Cao</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">MINE<span>CRAFT</span></div>
+            <ul>
+                <li><a href="index.html">Trang Chủ</a></li>
+                <li><a href="#store">Cửa Hàng</a></li>
+                <li><a href="topup.html" class="nav-topup">Nạp Thẻ</a></li>
+                <li><a href="top-nap.html">Top Nạp</a></li>
+                <li><a href="#staff">Đội Ngũ</a></li>
+                <li><a href="#contact">Liên Hệ</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Chào mừng đến với <br><span>Thế Giới Minecraft</span></h1>
+                <p>Khám phá vùng đất mới, xây dựng đế chế của riêng bạn và chiến đấu cùng bạn bè.</p>
+                <div class="server-status">
+                    <span id="ip-address">play.yourname.com</span>
+                    <button onclick="copyIP()">Sao chép IP</button>
+                </div>
+                <div class="player-count">
+                    <i class="fas fa-users"></i> <span id="online-players">0</span> người chơi đang online
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="features">
+            <div class="feature-card">
+                <i class="fas fa-sword"></i>
+                <h3>Survival</h3>
+                <p>Sinh tồn cơ bản với các tính năng mới lạ, cộng đồng thân thiện.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-cube"></i>
+                <h3>Skyblock</h3>
+                <p>Xây dựng hòn đảo từ hư không, đua top nhận quà khủng.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-shield-alt"></i>
+                <h3>BedWars</h3>
+                <p>Chiến thuật bảo vệ giường đỉnh cao cùng đồng đội.</p>
+            </div>
+        </section>
+
+        <section id="store" class="store">
+            <h2 class="section-title">Cửa Hàng <span>Nổi Bật</span></h2>
+            <div class="store-container">
+                <div class="store-card">
+                    <div class="rank-badge">VIP</div>
+                    <h3>Gói VIP</h3>
+                    <p class="price">50.000đ <span>/tháng</span></p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Prefix [VIP] nổi bật</li>
+                        <li><i class="fas fa-check"></i> Quyền bay lượn (/fly)</li>
+                        <li><i class="fas fa-check"></i> Kit VIP hàng tuần</li>
+                    </ul>
+                    <button class="buy-btn">Mua Ngay</button>
+                </div>
+                <div class="store-card premium">
+                    <div class="rank-badge">MVP</div>
+                    <h3>Gói MVP</h3>
+                    <p class="price">150.000đ <span>/tháng</span></p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Mọi quyền lợi của VIP</li>
+                        <li><i class="fas fa-check"></i> Prefix [MVP+] rực rỡ</li>
+                        <li><i class="fas fa-check"></i> Truy cập Server Full</li>
+                        <li><i class="fas fa-check"></i> Giảm 10% các gói khác</li>
+                    </ul>
+                    <button class="buy-btn">Mua Ngay</button>
+                </div>
+                <div class="store-card">
+                    <div class="rank-badge">COINS</div>
+                    <h3>1.000 Coins</h3>
+                    <p class="price">20.000đ</p>
+                    <p>Dùng để mua vật phẩm trong game, nâng cấp kỹ năng.</p>
+                    <button class="buy-btn">Mua Ngay</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="vote" class="vote">
+            <h2 class="section-title">Bình Chọn <span>Server</span></h2>
+            <p>Vote mỗi ngày để nhận phần quà hấp dẫn và giúp server phát triển hơn!</p>
+            <div class="vote-links">
+                <a href="#" class="vote-btn"><i class="fas fa-link"></i> TopG.org</a>
+                <a href="#" class="vote-btn"><i class="fas fa-link"></i> Minecraft-MP.com</a>
+                <a href="#" class="vote-btn"><i class="fas fa-link"></i> MinecraftServers.org</a>
+            </div>
+        </section>
+        <section id="staff" class="staff">
+            <h2 class="section-title">Đội Ngũ <span>Quản Trị</span></h2>
+            <div class="staff-container">
+                <div class="staff-card">
+                    <div class="staff-img"><i class="fas fa-user-shield"></i></div>
+                    <h3>Nguyễn Văn An</h3>
+                    <p class="role owner">Owner / Developer</p>
+                    <p>Người sáng lập và chịu trách nhiệm kỹ thuật chính cho server.</p>
+                </div>
+                <div class="staff-card">
+                    <div class="staff-img"><i class="fas fa-user-crown"></i></div>
+                    <h3>Mod_Name</h3>
+                    <p class="role admin">Admin</p>
+                    <p>Quản lý cộng đồng, sự kiện và hỗ trợ người chơi 24/7.</p>
+                </div>
+                <div class="staff-card">
+                    <div class="staff-img"><i class="fas fa-user-tie"></i></div>
+                    <h3>Staff_Name</h3>
+                    <p class="role moderator">Moderator</p>
+                    <p>Giám sát trong game, xử lý các vi phạm và khiếu nại.</p>
+                </div>
+            </div>
+        </section>
+        <section id="contact" class="contact">
+            <h2 class="section-title">Kết Nối <span>Cộng Đồng</span></h2>
+            <div class="contact-container">
+                <a href="https://discord.com/users/an26_09_" target="_blank" class="contact-card discord">
+                    <i class="fab fa-discord"></i>
+                    <h3>Discord</h3>
+                    <p>an26_09_</p>
+                </a>
+                <a href="https://facebook.com/anngtvvn" target="_blank" class="contact-card facebook">
+                    <i class="fab fa-facebook"></i>
+                    <h3>Facebook</h3>
+                    <p>anngtvvn</p>
+                </a>
+                <a href="mailto:nguyenvanan.20092010@gmail.com" class="contact-card email">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Email</h3>
+                    <p>nguyenvanan.20092010@gmail.com</p>
+                </a>
+            </div>
+        </section>
+
+        <section id="faq" class="faq">
+            <h2 class="section-title">Câu Hỏi <span>Thường Gặp</span></h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">Làm sao để tham gia server? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">Bạn chỉ cần mở Minecraft, chọn Multiplayer -> Add Server và nhập địa chỉ IP: play.yourname.com</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Server hỗ trợ phiên bản nào? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">Chúng tôi hỗ trợ từ phiên bản 1.16.5 đến 1.20.x mới nhất.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Làm sao để nạp thẻ/mua rank? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">Bạn có thể truy cập phần Cửa hàng trên website hoặc dùng lệnh /napthe trong game.</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Minecraft Server VN. All rights reserved.</p>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
+v class="faq-question">Làm sao để tham gia server? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">Bạn chỉ cần mở Minecraft, chọn Multiplayer -> Add Server và nhập địa chỉ IP: play.yourname.com</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Server hỗ trợ phiên bản nào? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">Chúng tôi hỗ trợ từ phiên bản 1.16.5 đến 1.20.x mới nhất.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Làm sao để nạp thẻ/mua rank? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">Bạn có thể truy cập phần Cửa hàng trên website hoặc dùng lệnh /napthe trong game.</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Minecraft Server VN. All rights reserved.</p>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
