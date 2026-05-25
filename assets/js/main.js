@@ -17,9 +17,12 @@ function copyIP() {
 }
 
 // Kết nối API thực tế để lấy trạng thái Server
-const SERVER_IP = document.getElementById('ip-address').innerText;
-
 async function updateServerStatus() {
+    const ipElement = document.getElementById('ip-address');
+    if (!ipElement) return;
+
+    const SERVER_IP = ipElement.innerText;
+    
     try {
         const response = await fetch(`https://api.mcsrvstat.us/2/${SERVER_IP}`);
         const data = await response.json();
@@ -29,25 +32,30 @@ async function updateServerStatus() {
         const statusIcon = document.querySelector('.player-count i');
         
         if (data.online) {
-            playerElement.innerText = data.players.online;
-            versionElement.innerText = data.version || '1.16 - 1.20';
-            statusIcon.style.color = '#4CAF50'; // Hiện màu xanh khi online
+            if (playerElement) playerElement.innerText = data.players.online;
+            if (versionElement) {
+                // Ưu tiên hiển thị version string, nếu không có thì dùng dãy phiên bản hỗ trợ
+                versionElement.innerText = data.version || (data.protocol && data.protocol.name) || '1.16 - 1.20';
+            }
+            if (statusIcon) statusIcon.style.color = '#4CAF50';
         } else {
-            playerElement.innerText = '0';
-            versionElement.innerText = 'Offline';
-            statusIcon.style.color = '#ff4d4d'; // Hiện màu đỏ khi offline
+            if (playerElement) playerElement.innerText = '0';
+            if (versionElement) versionElement.innerText = 'Offline';
+            if (statusIcon) statusIcon.style.color = '#ff4d4d';
             console.warn('Server hiện đang offline hoặc IP không đúng.');
         }
     } catch (error) {
         console.error('Lỗi khi lấy dữ liệu từ API:', error);
-        document.getElementById('online-players').innerText = '?';
-        document.getElementById('server-version').innerText = 'Lỗi kết nối';
+        if (document.getElementById('online-players')) document.getElementById('online-players').innerText = '?';
+        if (document.getElementById('server-version')) document.getElementById('server-version').innerText = 'Lỗi kết nối';
     }
 }
 
-// Cập nhật ngay khi tải trang và mỗi 60 giây
-updateServerStatus();
-setInterval(updateServerStatus, 60000);
+// Khởi chạy khi trang load xong
+document.addEventListener('DOMContentLoaded', () => {
+    updateServerStatus();
+    setInterval(updateServerStatus, 60000);
+});
 
 
 // FAQ Toggle logic
