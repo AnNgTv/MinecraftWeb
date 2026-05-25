@@ -566,41 +566,212 @@ footer {
     background: #000;
 }
 
-/* Media Queries */
-@media (max-width: 768px) {
-    nav {
-        flex-direction: column;
-        padding: 10px;
+/* Navigation & Mobile Menu */
+.menu-toggle {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #fff;
+}
+
+@media (max-width: 992px) {
+    .menu-toggle {
+        display: block;
     }
 
-    nav ul {
-        margin-top: 15px;
-    }
-
-    nav ul li {
-        margin: 0 10px;
-    }
-
-    .hero-content h1 {
-        font-size: 32px;
-    }
-
-    .features {
+    .nav-links {
+        position: fixed;
+        top: 80px;
+        right: -100%;
+        width: 100%;
+        height: calc(100vh - 80px);
+        background: rgba(0, 0, 0, 0.95);
         flex-direction: column;
         align-items: center;
+        justify-content: flex-start;
+        padding-top: 50px;
+        transition: 0.5s;
     }
 
-    .feature-card {
-        margin-bottom: 20px;
-        width: 100%;
+    .nav-links.active {
+        right: 0;
     }
 
-    .store-card {
-        width: 100%;
-    }
-
-    .vote-links {
-        flex-direction: column;
-        padding: 0 20px;
+    .nav-links li {
+        margin: 20px 0;
     }
 }
+
+/* News Section */
+.news {
+    padding: 100px 20px;
+    background: #0f0f0f;
+}
+
+.news-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.news-card {
+    background: #1a1a1a;
+    border-radius: 15px;
+    overflow: hidden;
+    width: 350px;
+    border: 1px solid #333;
+    transition: 0.3s;
+}
+
+.news-card:hover {
+    transform: translateY(-10px);
+    border-color: #4CAF50;
+}
+
+.news-img {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+}
+
+.news-body {
+    padding: 25px;
+}
+
+.news-date {
+    color: #4CAF50;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.news-body h3 {
+    margin: 10px 0;
+    font-size: 20px;
+}
+
+.news-body p {
+    color: #ccc;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.read-more {
+    color: #4CAF50;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+/* Gallery Section */
+.gallery {
+    padding: 100px 20px;
+    background: #1a1a1a;
+}
+
+.gallery-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.gallery-item {
+    border-radius: 10px;
+    overflow: hidden;
+    height: 250px;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.gallery-item img:hover {
+    transform: scale(1.1);
+}
+
+/* Rules Section */
+.rules {
+    padding: 100px 20px;
+    background: #1a1a1a;
+}
+
+.rules-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.rules-box {
+    background: #252525;
+    padding: 40px;
+    border-radius: 15px;
+    width: 450px;
+    border-left: 5px solid #4CAF50;
+}
+
+.rules-box h3 {
+    margin-bottom: 20px;
+    color: #4CAF50;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.rules-box ul {
+    list-style: none;
+}
+
+.rules-box ul li {
+    margin-bottom: 12px;
+    position: relative;
+    padding-left: 25px;
+}
+
+.rules-box ul li::before {
+    content: "\f00c";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    position: absolute;
+    left: 0;
+    color: #4CAF50;
+}
+
+/* Back to Top Button */
+#back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    z-index: 1000;
+    transition: 0.3s;
+}
+
+#back-to-top:hover {
+    background: #45a049;
+    transform: translateY(-5px);
+}
+
+
+

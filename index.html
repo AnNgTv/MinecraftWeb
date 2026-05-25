@@ -12,14 +12,17 @@
     <header>
         <nav>
             <div class="logo">MINE<span>CRAFT</span></div>
-            <ul>
+            <div class="menu-toggle" id="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links">
                 <li><a href="index.html">Trang Chủ</a></li>
+                <li><a href="#news">Tin Tức</a></li>
                 <li><a href="#store">Cửa Hàng</a></li>
                 <li><a href="topup.html" class="nav-topup">Nạp Thẻ</a></li>
                 <li><a href="top-nap.html">Top Nạp</a></li>
                 <li><a href="#staff">Đội Ngũ</a></li>
                 <li><a href="#contact">Liên Hệ</a></li>
-                <li><a href="#faq">FAQ</a></li>
             </ul>
         </nav>
     </header>
@@ -30,12 +33,48 @@
                 <h1>Chào mừng đến với <br><span>Thế Giới Minecraft</span></h1>
                 <p>Khám phá vùng đất mới, xây dựng đế chế của riêng bạn và chiến đấu cùng bạn bè.</p>
                 <div class="server-status">
-                    <span id="ip-address">play.yourname.com</span>
+                    <span id="ip-address">swiftoutpost153.mcsh.io</span>
                     <button onclick="copyIP()">Sao chép IP</button>
                 </div>
                 <div class="player-count">
                     <i class="fas fa-users"></i> <span id="online-players">0</span> người chơi đang online
                 </div>
+                <div class="server-version" style="margin-top: 10px; font-size: 14px; color: #aaa;">
+                    Phiên bản: <span id="server-version">Đang tải...</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="news" class="news">
+            <h2 class="section-title">Tin Tức <span>Mới Nhất</span></h2>
+            <div class="news-container">
+                <article class="news-card">
+                    <div class="news-img" style="background-image: url('https://images.unsplash.com/photo-1587573089734-09cb69c0f2b4?auto=format&fit=crop&w=400&q=80')"></div>
+                    <div class="news-body">
+                        <span class="news-date">25 Tháng 5, 2026</span>
+                        <h3>Khai mở Server Season 2</h3>
+                        <p>Chào đón sự trở lại với nhiều tính năng mới, bản đồ mở rộng và hàng ngàn quà tặng hấp dẫn...</p>
+                        <a href="#" class="read-more">Xem thêm</a>
+                    </div>
+                </article>
+                <article class="news-card">
+                    <div class="news-img" style="background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=400&q=80')"></div>
+                    <div class="news-body">
+                        <span class="news-date">20 Tháng 5, 2026</span>
+                        <h3>Sự kiện Đua Top Nạp Thẻ</h3>
+                        <p>Cơ hội sở hữu danh hiệu độc quyền và phần thưởng trị giá lên đến 5.000.000 VNĐ cho top 1...</p>
+                        <a href="#" class="read-more">Xem thêm</a>
+                    </div>
+                </article>
+                <article class="news-card">
+                    <div class="news-img" style="background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=400&q=80')"></div>
+                    <div class="news-body">
+                        <span class="news-date">15 Tháng 5, 2026</span>
+                        <h3>Cập nhật Hệ thống Anti-Cheat</h3>
+                        <p>Nâng cấp bảo mật, đảm bảo môi trường chơi game công bằng và lành mạnh nhất cho mọi người...</p>
+                        <a href="#" class="read-more">Xem thêm</a>
+                    </div>
+                </article>
             </div>
         </section>
 
@@ -54,6 +93,30 @@
                 <i class="fas fa-shield-alt"></i>
                 <h3>BedWars</h3>
                 <p>Chiến thuật bảo vệ giường đỉnh cao cùng đồng đội.</p>
+            </div>
+        </section>
+
+        <section id="rules" class="rules">
+            <h2 class="section-title">Luật <span>Máy Chủ</span></h2>
+            <div class="rules-container">
+                <div class="rules-box">
+                    <h3><i class="fas fa-gavel"></i> Quy Định Chung</h3>
+                    <ul>
+                        <li>Không sử dụng hack/cheat/mod gây mất cân bằng.</li>
+                        <li>Không lợi dụng lỗi (bug) của server để trục lợi.</li>
+                        <li>Tôn trọng người chơi khác và đội ngũ Staff.</li>
+                        <li>Không quảng cáo các server khác dưới mọi hình thức.</li>
+                    </ul>
+                </div>
+                <div class="rules-box">
+                    <h3><i class="fas fa-comments"></i> Văn Hóa Chat</h3>
+                    <ul>
+                        <li>Không spam, viết hoa vô tội vạ (caps lock).</li>
+                        <li>Không văng tục, chửi thề, xúc phạm người khác.</li>
+                        <li>Không tranh luận về chính trị, tôn giáo, sắc tộc.</li>
+                        <li>Sử dụng ngôn ngữ lịch sự, phù hợp với mọi lứa tuổi.</li>
+                    </ul>
+                </div>
             </div>
         </section>
 
@@ -90,6 +153,18 @@
                     <p>Dùng để mua vật phẩm trong game, nâng cấp kỹ năng.</p>
                     <button class="buy-btn">Mua Ngay</button>
                 </div>
+            </div>
+        </section>
+
+        <section id="gallery" class="gallery">
+            <h2 class="section-title">Thế Giới <span>Sáng Tạo</span></h2>
+            <div class="gallery-container">
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=500&q=60" alt="Minecraft 1"></div>
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=500&q=60" alt="Minecraft 2"></div>
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=500&q=60" alt="Minecraft 3"></div>
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1607988523858-4676453a2d74?auto=format&fit=crop&w=500&q=60" alt="Minecraft 4"></div>
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=500&q=60" alt="Minecraft 5"></div>
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1627398242454-45a1465c2479?auto=format&fit=crop&w=500&q=60" alt="Minecraft 6"></div>
             </div>
         </section>
 
@@ -151,7 +226,7 @@
             <div class="faq-container">
                 <div class="faq-item">
                     <div class="faq-question">Làm sao để tham gia server? <i class="fas fa-chevron-down"></i></div>
-                    <div class="faq-answer">Bạn chỉ cần mở Minecraft, chọn Multiplayer -> Add Server và nhập địa chỉ IP: play.yourname.com</div>
+                    <div class="faq-answer">Bạn chỉ cần mở Minecraft, chọn Multiplayer -> Add Server và nhập địa chỉ IP: swiftoutpost153.mcsh.io</div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-question">Server hỗ trợ phiên bản nào? <i class="fas fa-chevron-down"></i></div>
@@ -169,27 +244,7 @@
         <p>&copy; 2026 Minecraft Server VN. All rights reserved.</p>
     </footer>
 
-    <script src="assets/js/main.js"></script>
-</body>
-</html>
-v class="faq-question">Làm sao để tham gia server? <i class="fas fa-chevron-down"></i></div>
-                    <div class="faq-answer">Bạn chỉ cần mở Minecraft, chọn Multiplayer -> Add Server và nhập địa chỉ IP: play.yourname.com</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">Server hỗ trợ phiên bản nào? <i class="fas fa-chevron-down"></i></div>
-                    <div class="faq-answer">Chúng tôi hỗ trợ từ phiên bản 1.16.5 đến 1.20.x mới nhất.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">Làm sao để nạp thẻ/mua rank? <i class="fas fa-chevron-down"></i></div>
-                    <div class="faq-answer">Bạn có thể truy cập phần Cửa hàng trên website hoặc dùng lệnh /napthe trong game.</div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2026 Minecraft Server VN. All rights reserved.</p>
-    </footer>
+    <button id="back-to-top" title="Lên đầu trang"><i class="fas fa-chevron-up"></i></button>
 
     <script src="assets/js/main.js"></script>
 </body>
