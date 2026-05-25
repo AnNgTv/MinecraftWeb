@@ -107,4 +107,22 @@ backToTopBtn.addEventListener('click', () => {
     });
 });
 
+// Background Music Logic
+const musicBtn = document.getElementById('music-toggle');
+const bgMusic = document.getElementById('bg-music');
+
+if (musicBtn && bgMusic) {
+    musicBtn.addEventListener('click', () => {
+        if (bgMusic.paused) {
+            bgMusic.play();
+            musicBtn.classList.remove('muted');
+            musicBtn.innerHTML = '<i class="fas fa-music"></i>';
+        } else {
+            bgMusic.pause();
+            musicBtn.classList.add('muted');
+            musicBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+        }
+    });
+}
+
 
