@@ -10,7 +10,7 @@ html {
 }
 
 body {
-    background-color: #0f0f0f;
+    background-color: red !important;
     color: #fff;
     line-height: 1.6;
 }
