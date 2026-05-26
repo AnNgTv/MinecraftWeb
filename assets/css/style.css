@@ -114,6 +114,13 @@ nav ul li a:hover {
     justify-content: center;
     font-size: 30px;
     color: #4CAF50;
+    overflow: hidden;
+}
+
+.staff-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .role {
