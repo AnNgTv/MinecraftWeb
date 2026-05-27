@@ -33,6 +33,15 @@ async function updateServerStatus() {
         
         if (data.online) {
             if (playerElement) playerElement.innerText = data.players.online;
+            
+            // Cập nhật thanh player bar
+            const bar = document.getElementById('player-bar');
+            if (bar) {
+                const maxPlayers = data.players.max || 100;
+                const percent = Math.min((data.players.online / maxPlayers) * 100, 100);
+                bar.style.width = percent + '%';
+            }
+
             if (versionElement) {
                 // Ưu tiên hiển thị version string, nếu không có thì dùng dãy phiên bản hỗ trợ
                 versionElement.innerText = data.version || (data.protocol && data.protocol.name) || '1.16 - 1.20';
@@ -51,10 +60,36 @@ async function updateServerStatus() {
     }
 }
 
+async function loadRecentDonators() {
+    const list = document.getElementById('recent-donators-list');
+    if (!list) return;
+
+    try {
+        const response = await fetch(`${API_BASE}/api/recent-recharge`);
+        const data = await response.json();
+        
+        if (data.length === 0) {
+            list.innerHTML = '<p style="text-align: center; font-size: 12px; color: #888; padding: 10px;">Chưa có hoạt động nạp thẻ gần đây.</p>';
+            return;
+        }
+
+        list.innerHTML = data.map(item => `
+            <div class="donator-item">
+                <span class="donator-name"><i class="fas fa-user-circle"></i> ${item.username}</span>
+                <span class="donator-amount">+${item.amount.toLocaleString()}đ</span>
+            </div>
+        `).join('');
+    } catch (error) {
+        console.error('Lỗi tải nạp gần đây:', error);
+    }
+}
+
 // Khởi chạy khi trang load xong
 document.addEventListener('DOMContentLoaded', () => {
     updateServerStatus();
+    loadRecentDonators();
     setInterval(updateServerStatus, 60000);
+    setInterval(loadRecentDonators, 30000); // Cập nhật mỗi 30s
 });
 
 

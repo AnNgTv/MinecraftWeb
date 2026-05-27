@@ -17,7 +17,6 @@
             </div>
             <ul class="nav-links">
                 <li><a href="index.html">Trang Chủ</a></li>
-                <li><a href="index.html#news">Tin Tức</a></li>
                 <li><a href="index.html#store">Cửa Hàng</a></li>
                 <li><a href="topup.html" class="nav-topup">Nạp Thẻ</a></li>
                 <li><a href="top-nap.html">Top Nạp</a></li>
@@ -50,6 +49,13 @@
             </table>
         </div>
 
+        <!-- Recent Donators -->
+        <div class="recent-donators">
+            <h4><i class="fas fa-history"></i> Ủng hộ gần đây</h4>
+            <div id="recent-donators-list">
+                <p style="text-align: center; font-size: 12px; color: #888; padding: 10px;">Đang tải...</p>
+            </div>
+        </div>
         <div class="top-nap-footer">
             <p><i class="fas fa-info-circle"></i> Bảng xếp hạng cập nhật tự động mỗi khi có nạp mới.</p>
             <a href="topup.html" class="buy-btn" style="display: inline-block; width: auto; margin-top: 20px; text-decoration: none;">Đua Top Ngay</a>
@@ -112,7 +118,28 @@
             }
         }
 
+        async function loadRecentDonators() {
+            const list = document.getElementById('recent-donators-list');
+            if (!list) return;
+            try {
+                const response = await fetch(`${API_BASE}/api/recent-recharge`);
+                const data = await response.json();
+                if (data.length === 0) {
+                    list.innerHTML = '<p style="text-align: center; font-size: 12px; color: #888; padding: 10px;">Chưa có hoạt động nạp thẻ gần đây.</p>';
+                    return;
+                }
+                list.innerHTML = data.map(item => `
+                    <div class="donator-item">
+                        <span class="donator-name"><i class="fas fa-user-circle"></i> ${item.username}</span>
+                        <span class="donator-amount">+${item.amount.toLocaleString()}đ</span>
+                    </div>
+                `).join('');
+            } catch (error) { console.error(error); }
+        }
+
         loadLeaderboard();
+        loadRecentDonators();
+        setInterval(loadRecentDonators, 30000);
     </script>
 </body>
 </html>

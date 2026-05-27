@@ -17,7 +17,6 @@
             </div>
             <ul class="nav-links">
                 <li><a href="#hero">Trang Chủ</a></li>
-                <li><a href="#news">Tin Tức</a></li>
                 <li><a href="#store">Cửa Hàng</a></li>
                 <li><a href="#topup" class="nav-topup">Nạp Thẻ</a></li>
                 <li><a href="#leaderboard">Top Nạp</a></li>
@@ -38,43 +37,12 @@
                 </div>
                 <div class="player-count">
                     <i class="fas fa-users"></i> <span id="online-players">0</span> người chơi đang online
+                    <div class="player-bar-container">
+                        <div class="player-bar-fill" id="player-bar"></div>
+                    </div>
                 </div>
                 <div class="server-version" style="margin-top: 10px; font-size: 14px; color: #aaa;">
                     Phiên bản: <span id="server-version">Đang tải...</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- News Section -->
-        <section id="news" class="news">
-            <h2 class="section-title">Tin Tức <span>Mới Nhất</span></h2>
-            <div class="news-container">
-                <div class="news-card">
-                    <div class="news-img" style="background-image: url('https://minecraft.net/content/dam/games/minecraft/key-art/MC-Updates-1.21-Update-Keyart.jpg');"></div>
-                    <div class="news-body">
-                        <span class="news-date">25/05/2026</span>
-                        <h3>Cập Nhật Phiên Bản 1.21</h3>
-                        <p>Server chính thức hỗ trợ phiên bản 1.21 với nhiều tính năng mới như Trial Chambers và quái vật mới.</p>
-                        <a href="#" class="read-more">Xem thêm →</a>
-                    </div>
-                </div>
-                <div class="news-card">
-                    <div class="news-img" style="background-image: url('https://minecraft.net/content/dam/games/minecraft/key-art/Vanilla-Update-Keyart.jpg');"></div>
-                    <div class="news-body">
-                        <span class="news-date">20/05/2026</span>
-                        <h3>Sự Kiện Đua Top Nạp Tháng 5</h3>
-                        <p>Tham gia đua top nạp thẻ tháng này để nhận ngay danh hiệu độc quyền và bộ kit cực khủng!</p>
-                        <a href="#leaderboard" class="read-more">Xem thêm →</a>
-                    </div>
-                </div>
-                <div class="news-card">
-                    <div class="news-img" style="background-image: url('https://minecraft.net/content/dam/games/minecraft/key-art/TrickyTrials_Keyart_1200x675.png');"></div>
-                    <div class="news-body">
-                        <span class="news-date">15/05/2026</span>
-                        <h3>Khai Mở Server Survival Mới</h3>
-                        <p>Vùng đất mới đã sẵn sàng cho các chiến binh khám phá. Tham gia ngay hôm nay!</p>
-                        <a href="#" class="read-more">Xem thêm →</a>
-                    </div>
                 </div>
             </div>
         </section>
@@ -217,15 +185,35 @@
                     </tbody>
                 </table>
             </div>
+
+            <!-- Recent Donators -->
+            <div class="recent-donators">
+                <h4><i class="fas fa-history"></i> Ủng hộ gần đây</h4>
+                <div id="recent-donators-list">
+                    <p style="text-align: center; font-size: 12px; color: #888; padding: 10px;">Đang tải...</p>
+                </div>
+            </div>
         </section>
 
         <section id="vote" class="vote">
             <h2 class="section-title">Bình Chọn <span>Server</span></h2>
             <p>Vote mỗi ngày để nhận phần quà hấp dẫn và giúp server phát triển hơn!</p>
-            <div class="vote-links">
-                <a href="https://topg.org/minecraft-servers/server-682658#vote" target="_blank" class="vote-btn"><i class="fas fa-link"></i> TopG.org</a>
-                <a href="https://minecraft-mp.com/server/358544/vote/" target="_blank" class="vote-btn"><i class="fas fa-link"></i> Minecraft-MP.com</a>
-                <a href="https://minecraftservers.org/vote/687978" target="_blank" class="vote-btn"><i class="fas fa-link"></i> MinecraftServers.org</a>
+            <div class="vote-grid">
+                <a href="https://topg.org/minecraft-servers/server-682658#vote" target="_blank" class="vote-card">
+                    <i class="fas fa-vote-yea"></i>
+                    <h3>TopG.org</h3>
+                    <p>Nhận ngay 500 Coins mỗi lần Vote</p>
+                </a>
+                <a href="https://minecraft-mp.com/server/358544/vote/" target="_blank" class="vote-card">
+                    <i class="fas fa-vote-yea"></i>
+                    <h3>Minecraft-MP</h3>
+                    <p>Cơ hội nhận Key Crate may mắn</p>
+                </a>
+                <a href="https://minecraftservers.org/vote/687978" target="_blank" class="vote-card">
+                    <i class="fas fa-vote-yea"></i>
+                    <h3>MC-Servers</h3>
+                    <p>Hỗ trợ server tăng hạng Top</p>
+                </a>
             </div>
         </section>
         <section id="staff" class="staff">
