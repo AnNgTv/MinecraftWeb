@@ -161,3 +161,41 @@ if (musicBtn && bgMusic) {
 }
 
 
+
+// Store Filtering Logic
+const filterButtons = document.querySelectorAll('.cat-btn');
+const searchInput = document.querySelector('.search-box input');
+const storeCards = document.querySelectorAll('.store-card');
+
+function filterStore() {
+    const activeCategory = document.querySelector('.cat-btn.active').dataset.category;
+    const searchText = searchInput.value.toLowerCase();
+
+    storeCards.forEach(card => {
+        const cardCategory = card.dataset.category;
+        const cardTitle = card.querySelector('h3').innerText.toLowerCase();
+        
+        const matchesCategory = activeCategory === 'all' || cardCategory === activeCategory;
+        const matchesSearch = cardTitle.includes(searchText);
+
+        if (matchesCategory && matchesSearch) {
+            card.style.display = 'block';
+            setTimeout(() => card.style.opacity = '1', 10);
+        } else {
+            card.style.opacity = '0';
+            setTimeout(() => card.style.display = 'none', 300);
+        }
+    });
+}
+
+filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        filterStore();
+    });
+});
+
+if (searchInput) {
+    searchInput.addEventListener('input', filterStore);
+}
