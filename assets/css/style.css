@@ -778,3 +778,64 @@ button:hover, .buy-btn:hover {
         max-width: none;
     }
 }
+
+/* Quick Navigation Bar */
+.quick-nav {
+    background: #151518;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 10px 0;
+    position: sticky;
+    top: 70px; /* Right below the header */
+    z-index: 998;
+    overflow-x: auto;
+}
+
+.quick-nav-container {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 0 20px;
+}
+
+.q-link {
+    text-decoration: none;
+    color: #888;
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    transition: 0.3s;
+    padding: 8px 0;
+    position: relative;
+}
+
+.q-link i {
+    font-size: 16px;
+    color: var(--primary);
+}
+
+.q-link:hover, .q-link.active {
+    color: #fff;
+}
+
+.q-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--gradient-neon);
+    box-shadow: 0 0 10px var(--primary-glow);
+}
+
+@media (max-width: 992px) {
+    .quick-nav-container {
+        justify-content: flex-start;
+        gap: 20px;
+    }
+}
