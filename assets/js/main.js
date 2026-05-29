@@ -340,6 +340,9 @@ async function checkLoginStatus() {
             document.getElementById('profile-points').innerText = data.user.points;
             document.getElementById('profile-total').innerText = data.user.totalRecharge.toLocaleString() + 'đ';
             document.getElementById('user-skin').src = `https://crafatar.com/avatars/${data.user.username}?size=100&overlay`;
+            
+            // Tải thêm lịch sử nạp
+            loadUserHistory();
         } else {
             handleLogout();
         }
@@ -352,3 +355,34 @@ async function checkLoginStatus() {
 document.addEventListener('DOMContentLoaded', () => {
     checkLoginStatus();
 });
+
+// Lấy lịch sử nạp cá nhân
+async function loadUserHistory() {
+    const token = localStorage.getItem('mc_token');
+    const listBody = document.getElementById('personal-history-body');
+    if (!token || !listBody) return;
+
+    try {
+        const response = await fetch(`${API_BASE}/api/auth/transactions`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        const data = await response.json();
+
+        if (data.status === 'success') {
+            if (data.transactions.length === 0) {
+                listBody.innerHTML = '<tr><td colspan="3" style="text-align: center; color: #888;">Bạn chưa có giao dịch nào.</td></tr>';
+                return;
+            }
+
+            listBody.innerHTML = data.transactions.map(item => `
+                <tr>
+                    <td>${new Date(item.date).toLocaleDateString('vi-VN')}</td>
+                    <td>${item.amount.toLocaleString()}đ</td>
+                    <td class="status-success">Thành công</td>
+                </tr>
+            `).join('');
+        }
+    } catch (error) {
+        console.error('Lỗi tải lịch sử nạp cá nhân');
+    }
+}
