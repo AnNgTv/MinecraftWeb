@@ -39,6 +39,40 @@
         </div>
     </div>
 
+    <!-- Account Lookup Modal -->
+    <div id="account-lookup" class="lookup-section">
+        <div class="lookup-container">
+            <h3><i class="fas fa-search"></i> Tra cứu tài khoản</h3>
+            <div class="search-form">
+                <input type="text" id="lookup-username" placeholder="Nhập tên người chơi...">
+                <button onclick="lookupAccount()">Tìm kiếm</button>
+            </div>
+            <div id="lookup-result" class="lookup-result" style="display: none;">
+                <div class="player-info-grid">
+                    <div class="info-item">
+                        <span class="label">Tên:</span>
+                        <span id="res-username" class="value">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Số dư (Xu):</span>
+                        <span id="res-points" class="value">0</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Hạng (Rank):</span>
+                        <span id="res-rank" class="value">Default</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Tổng nạp:</span>
+                        <span id="res-total" class="value">0đ</span>
+                    </div>
+                </div>
+            </div>
+            <div id="lookup-loading" style="display: none; text-align: center; margin-top: 10px;">
+                <i class="fas fa-spinner fa-spin"></i> Đang tải dữ liệu...
+            </div>
+        </div>
+    </div>
+
     <main>
         <section id="hero" class="hero">
             <div class="hero-content">

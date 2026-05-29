@@ -199,3 +199,39 @@ filterButtons.forEach(btn => {
 if (searchInput) {
     searchInput.addEventListener('input', filterStore);
 }
+
+// Tra cứu thông tin tài khoản
+async function lookupAccount() {
+    const username = document.getElementById('lookup-username').value.trim();
+    if (!username) {
+        alert('Vui lòng nhập tên người chơi!');
+        return;
+    }
+
+    const resultDiv = document.getElementById('lookup-result');
+    const loadingDiv = document.getElementById('lookup-loading');
+
+    resultDiv.style.display = 'none';
+    loadingDiv.style.display = 'block';
+
+    try {
+        const response = await fetch(`${API_BASE}/api/player/${username}`);
+        const res = await response.json();
+
+        if (res.status === 'success') {
+            document.getElementById('res-username').innerText = res.data.username;
+            document.getElementById('res-points').innerText = res.data.points.toLocaleString();
+            document.getElementById('res-rank').innerText = res.data.rank;
+            document.getElementById('res-total').innerText = res.data.totalRecharge.toLocaleString() + 'đ';
+            
+            resultDiv.style.display = 'block';
+        } else {
+            alert(res.message || 'Không tìm thấy người chơi này!');
+        }
+    } catch (error) {
+        console.error('Lỗi tra cứu:', error);
+        alert('Lỗi kết nối tới hệ thống tra cứu!');
+    } finally {
+        loadingDiv.style.display = 'none';
+    }
+}

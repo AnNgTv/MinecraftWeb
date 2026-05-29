@@ -839,3 +839,75 @@ button:hover, .buy-btn:hover {
         gap: 20px;
     }
 }
+
+/* Account Lookup Styles */
+.lookup-section {
+    padding: 20px 0;
+    background: #1a1a1a;
+    border-bottom: 2px solid #333;
+}
+.lookup-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #252525;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+.lookup-container h3 {
+    margin-bottom: 15px;
+    color: #4CAF50;
+    text-align: center;
+}
+.search-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.search-form input {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    background: #333;
+    color: white;
+}
+.search-form button {
+    padding: 10px 25px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+.search-form button:hover {
+    background: #45a049;
+}
+.player-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    padding: 15px;
+    background: #1a1a1a;
+    border-radius: 8px;
+}
+.info-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #333;
+    border-radius: 5px;
+}
+.info-item .label {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 5px;
+}
+.info-item .value {
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+}
