@@ -235,3 +235,120 @@ async function lookupAccount() {
         loadingDiv.style.display = 'none';
     }
 }
+
+// --- QUẢN LÝ ĐĂNG NHẬP / ĐĂNG KÝ ---
+function openAuthModal(type) {
+    document.getElementById('auth-modal').style.display = 'flex';
+    switchAuthTab(type);
+}
+
+function closeAuthModal() {
+    document.getElementById('auth-modal').style.display = 'none';
+}
+
+function switchAuthTab(type) {
+    const loginForm = document.getElementById('login-form');
+    const regForm = document.getElementById('register-form');
+    const tabLogin = document.getElementById('tab-login');
+    const tabReg = document.getElementById('tab-register');
+
+    if (type === 'login') {
+        loginForm.style.display = 'block';
+        regForm.style.display = 'none';
+        tabLogin.classList.add('active');
+        tabReg.classList.remove('active');
+    } else {
+        loginForm.style.display = 'none';
+        regForm.style.display = 'block';
+        tabLogin.classList.remove('active');
+        tabReg.classList.add('active');
+    }
+}
+
+async function handleAuth(event, type) {
+    event.preventDefault();
+    const API_URL = type === 'login' ? `${API_BASE}/api/auth/login` : `${API_BASE}/api/auth/register`;
+    
+    let body = {};
+    if (type === 'login') {
+        body = {
+            username: document.getElementById('login-user').value,
+            password: document.getElementById('login-pass').value
+        };
+    } else {
+        const pass = document.getElementById('reg-pass').value;
+        const confirm = document.getElementById('reg-pass-confirm').value;
+        if (pass !== confirm) return alert('Mật khẩu xác nhận không khớp!');
+        
+        body = {
+            username: document.getElementById('reg-user').value,
+            password: pass
+        };
+    }
+
+    try {
+        const response = await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body)
+        });
+        const data = await response.json();
+
+        if (data.status === 'success') {
+            if (type === 'login') {
+                localStorage.setItem('mc_token', data.token);
+                localStorage.setItem('mc_user', data.username);
+                alert('Đăng nhập thành công!');
+                location.reload();
+            } else {
+                alert('Đăng ký thành công! Hãy đăng nhập.');
+                switchAuthTab('login');
+            }
+        } else {
+            alert(data.message || 'Có lỗi xảy ra!');
+        }
+    } catch (error) {
+        alert('Lỗi kết nối server!');
+    }
+}
+
+function handleLogout() {
+    localStorage.removeItem('mc_token');
+    localStorage.removeItem('mc_user');
+    location.reload();
+}
+
+async function checkLoginStatus() {
+    const token = localStorage.getItem('mc_token');
+    if (!token) return;
+
+    try {
+        const response = await fetch(`${API_BASE}/api/auth/me`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        const data = await response.json();
+
+        if (data.status === 'success') {
+            document.getElementById('nav-login-btn').style.display = 'none';
+            document.getElementById('nav-user-info').style.display = 'block';
+            document.getElementById('nav-username').innerText = data.user.username;
+
+            // Cập nhật thông tin profile
+            document.getElementById('profile').style.display = 'block';
+            document.getElementById('profile-name').innerText = data.user.username;
+            document.getElementById('profile-rank-badge').innerText = data.user.rank;
+            document.getElementById('profile-points').innerText = data.user.points;
+            document.getElementById('profile-total').innerText = data.user.totalRecharge.toLocaleString() + 'đ';
+            document.getElementById('user-skin').src = `https://crafatar.com/avatars/${data.user.username}?size=100&overlay`;
+        } else {
+            handleLogout();
+        }
+    } catch (error) {
+        console.error('Lỗi kiểm tra đăng nhập');
+    }
+}
+
+// Thêm vào DOMContentLoaded
+document.addEventListener('DOMContentLoaded', () => {
+    checkLoginStatus();
+});

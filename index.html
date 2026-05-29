@@ -19,9 +19,9 @@
                 <li><a href="#hero">Trang Chủ</a></li>
                 <li><a href="#store">Cửa Hàng</a></li>
                 <li><a href="#topup" class="nav-topup">Nạp Thẻ</a></li>
+                <li id="nav-user-info" style="display: none;"><a href="#profile" class="user-link"><i class="fas fa-user-circle"></i> <span id="nav-username">Cá nhân</span></a></li>
+                <li id="nav-login-btn"><a href="javascript:void(0)" onclick="openAuthModal('login')">Đăng Nhập</a></li>
                 <li><a href="#leaderboard">Top Nạp</a></li>
-                <li><a href="#staff">Đội Ngũ</a></li>
-                <li><a href="#contact">Liên Hệ</a></li>
             </ul>
         </nav>
     </header>
@@ -38,6 +38,58 @@
             <a href="https://facebook.com/anngtvvn" target="_blank" class="q-link"><i class="fab fa-facebook"></i> Fanpage</a>
         </div>
     </div>
+
+    <!-- Auth Modal -->
+    <div id="auth-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeAuthModal()">&times;</span>
+            <div id="auth-tabs">
+                <button id="tab-login" class="active" onclick="switchAuthTab('login')">Đăng Nhập</button>
+                <button id="tab-register" onclick="switchAuthTab('register')">Đăng Ký</button>
+            </div>
+            
+            <!-- Login Form -->
+            <form id="login-form" onsubmit="handleAuth(event, 'login')">
+                <input type="text" placeholder="Tên tài khoản" required id="login-user">
+                <input type="password" placeholder="Mật khẩu" required id="login-pass">
+                <button type="submit" class="auth-btn">Vào hệ thống</button>
+            </form>
+
+            <!-- Register Form -->
+            <form id="register-form" onsubmit="handleAuth(event, 'register')" style="display: none;">
+                <input type="text" placeholder="Tên tài khoản Minecraft" required id="reg-user">
+                <input type="password" placeholder="Mật khẩu" required id="reg-pass">
+                <input type="password" placeholder="Xác nhận mật khẩu" required id="reg-pass-confirm">
+                <button type="submit" class="auth-btn">Tạo tài khoản</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- User Profile Section -->
+    <section id="profile" class="profile-section" style="display: none;">
+        <div class="profile-container">
+            <div class="profile-header">
+                <img id="user-skin" src="https://crafatar.com/avatars/steve?size=100&overlay" alt="Skin">
+                <div class="profile-title">
+                    <h2 id="profile-name">Tên Người Chơi</h2>
+                    <span id="profile-rank-badge" class="badge">Rank</span>
+                </div>
+                <button onclick="handleLogout()" class="logout-btn">Đăng xuất</button>
+            </div>
+            <div class="profile-stats">
+                <div class="stat-box">
+                    <i class="fas fa-coins"></i>
+                    <span class="stat-label">Số dư Xu</span>
+                    <span id="profile-points" class="stat-value">0</span>
+                </div>
+                <div class="stat-box">
+                    <i class="fas fa-credit-card"></i>
+                    <span class="stat-label">Tổng đã nạp</span>
+                    <span id="profile-total" class="stat-value">0đ</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Account Lookup Modal -->
     <div id="account-lookup" class="lookup-section">
