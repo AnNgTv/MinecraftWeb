@@ -542,7 +542,57 @@ button:hover, .buy-btn:hover {
     }
 }
 
+/* Hero Actions */
+.hero-btn-primary {
+    background: var(--gradient-neon);
+    color: #000;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-weight: 800;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: 0.3s;
+    box-shadow: 0 5px 20px var(--primary-glow);
+}
+
+.hero-btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px var(--primary-glow);
+}
+
+.hero-btn-secondary {
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-weight: 800;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: 0.3s;
+    backdrop-filter: blur(10px);
+}
+
+.hero-btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-3px);
+}
+
 @media (max-width: 480px) {
+    .hero-actions {
+        flex-direction: column;
+        width: 100%;
+        max-width: 250px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
     .hero-content h1 {
         font-size: 32px;
     }

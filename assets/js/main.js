@@ -333,6 +333,17 @@ async function checkLoginStatus() {
             document.getElementById('nav-user-info').style.display = 'block';
             document.getElementById('nav-username').innerText = data.user.username;
 
+            // Update Hero Actions if they exist
+            const heroActions = document.querySelector('.hero-actions');
+            if (heroActions) heroActions.style.display = 'none';
+
+            // Update Quick Nav
+            const qNavAuth = document.getElementById('q-nav-auth');
+            if (qNavAuth) {
+                qNavAuth.innerHTML = '<i class="fas fa-user-circle"></i> Cá Nhân';
+                qNavAuth.setAttribute('onclick', "location.href='#profile'");
+            }
+
             // Cập nhật thông tin profile
             document.getElementById('profile').style.display = 'block';
             document.getElementById('profile-name').innerText = data.user.username;
