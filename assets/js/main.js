@@ -88,7 +88,7 @@ async function loadRecentDonators() {
 document.addEventListener('DOMContentLoaded', () => {
     updateServerStatus();
     loadRecentDonators();
-    setInterval(updateServerStatus, 60000);
+    setInterval(updateServerStatus, 30000);
     setInterval(loadRecentDonators, 30000); // Cập nhật mỗi 30s
 });
 
