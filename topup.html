@@ -45,11 +45,33 @@
                     <p><strong>Ví điện tử:</strong> Momo / ZaloPay</p>
                     <p><strong>Số tài khoản/SĐT:</strong> <span style="color: #4CAF50; font-size: 20px;">0935420269</span></p>
                     <p><strong>Chủ tài khoản:</strong> NGUYEN VAN AN</p>
-                    <p><strong>Nội dung:</strong> <span style="color: #4CAF50;">NAP [Ten_In_Game]</span></p>
+                    <p><strong>Nội dung:</strong> <span id="qr-addinfo-display" style="color: #4CAF50;">NAP [Ten_In_Game]</span></p>
                 </div>
+
+                <!-- Nhập thông tin để tạo QR tự động -->
+                <div style="margin: 16px 0; display: flex; flex-direction: column; gap: 10px;">
+                    <input type="text" id="bank-username" placeholder="Tên In-Game của bạn" oninput="updateBankQR()"
+                        style="padding: 10px 14px; border-radius: 8px; border: 1px solid #444; background: #1a1a2e; color: #fff; font-size: 14px; outline: none;">
+                    <select id="bank-amount" onchange="updateBankQR()"
+                        style="padding: 10px 14px; border-radius: 8px; border: 1px solid #444; background: #1a1a2e; color: #fff; font-size: 14px; outline: none;">
+                        <option value="">-- Chọn số tiền --</option>
+                        <option value="10000">10.000đ</option>
+                        <option value="20000">20.000đ</option>
+                        <option value="50000">50.000đ</option>
+                        <option value="100000">100.000đ</option>
+                        <option value="200000">200.000đ</option>
+                        <option value="500000">500.000đ</option>
+                        <option value="1000000">1.000.000đ</option>
+                    </select>
+                </div>
+
                 <div class="qr-code-container" style="text-align: center; margin: 20px 0;">
-                    <img src="https://img.vietqr.io/image/MB-0935420269-compact2.png?accountName=NGUYEN%20VAN%20AN&addInfo=NAP%20TEN_CUA_BAN" alt="QR Thanh Toán Bank" style="width: 200px; border-radius: 10px; border: 5px solid #fff;">
+                    <img id="bank-qr-img"
+                        src="https://img.vietqr.io/image/MB-0935420269-compact2.png?accountName=NGUYEN%20VAN%20AN&addInfo=NAP%20TEN_IN_GAME"
+                        alt="QR Thanh Toán Bank"
+                        style="width: 220px; border-radius: 10px; border: 5px solid #fff; transition: opacity 0.3s;">
                     <p style="margin-top: 10px; font-size: 14px; color: #4CAF50;">Quét mã để nạp nhanh</p>
+                    <p id="qr-hint" style="font-size: 12px; color: #aaa; margin-top: 4px;">Nhập tên và chọn số tiền để QR tự điền nội dung</p>
                 </div>
                 <p style="font-size: 12px; color: #888;">* Tự động cộng tiền sau 1-5 phút chuyển khoản đúng nội dung.</p>
             </div>
@@ -125,6 +147,43 @@
     <script src="assets/js/config.js?v=1.3"></script>
     <script src="assets/js/main.js?v=1.3"></script>
     <script>
+        function updateBankQR() {
+            const username = document.getElementById('bank-username').value.trim();
+            const amount   = document.getElementById('bank-amount').value;
+            const img      = document.getElementById('bank-qr-img');
+            const hint     = document.getElementById('qr-hint');
+            const infoDisplay = document.getElementById('qr-addinfo-display');
+
+            const name    = 'NGUYEN VAN AN';
+            const account = '0935420269';
+            const bank    = 'MB';
+
+            const addInfo = username ? `NAP ${username.toUpperCase()}` : 'NAP TEN_IN_GAME';
+            infoDisplay.textContent = username ? `NAP ${username.toUpperCase()}` : 'NAP [Ten_In_Game]';
+
+            let url = `https://img.vietqr.io/image/${bank}-${account}-compact2.png?accountName=${encodeURIComponent(name)}&addInfo=${encodeURIComponent(addInfo)}`;
+            if (amount) url += `&amount=${amount}`;
+
+            img.style.opacity = '0.5';
+            const newImg = new Image();
+            newImg.onload = () => {
+                img.src = url;
+                img.style.opacity = '1';
+            };
+            newImg.src = url;
+
+            if (username && amount) {
+                hint.textContent = `✅ QR đã điền: ${addInfo} — ${Number(amount).toLocaleString()}đ`;
+                hint.style.color = '#4CAF50';
+            } else if (username) {
+                hint.textContent = `Đã điền tên: ${addInfo} — chọn số tiền để hoàn tất`;
+                hint.style.color = '#aaa';
+            } else {
+                hint.textContent = 'Nhập tên và chọn số tiền để QR tự điền nội dung';
+                hint.style.color = '#aaa';
+            }
+        }
+
         document.getElementById('topupCardForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             const user = document.getElementById('username').value;
