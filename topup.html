@@ -48,12 +48,18 @@
                     <p><strong>Nội dung:</strong> <span id="qr-addinfo-display" style="color: #4CAF50;">NAP [Ten_In_Game]</span></p>
                 </div>
 
-                <!-- Nhập thông tin để tạo QR tự động -->
-                <div style="margin: 16px 0; display: flex; flex-direction: column; gap: 10px;">
-                    <input type="text" id="bank-username" placeholder="Tên In-Game của bạn" oninput="updateBankQR()"
-                        style="padding: 10px 14px; border-radius: 8px; border: 1px solid #444; background: #1a1a2e; color: #fff; font-size: 14px; outline: none;">
+                <!-- Thông báo trạng thái đăng nhập -->
+                <div id="qr-login-warn" style="display:none; background:#1a1a2e; border:1px solid #4CAF50; border-radius:8px; padding:12px 16px; font-size:13px; color:#aaa; margin:16px 0; text-align:center;">
+                    Vui lòng <a href="javascript:void(0)" onclick="openAuthModal('login')" style="color:#4CAF50; font-weight:bold;">đăng nhập</a> để QR tự điền nội dung chuyển khoản.
+                </div>
+
+                <!-- Chỉ chọn số tiền, tên lấy từ tài khoản -->
+                <div id="qr-controls" style="display:none; margin: 16px 0;">
+                    <p style="font-size:13px; color:#aaa; margin-bottom:10px;">
+                        Nội dung chuyển khoản của bạn: <strong id="qr-fixed-name" style="color:#4CAF50;"></strong>
+                    </p>
                     <select id="bank-amount" onchange="updateBankQR()"
-                        style="padding: 10px 14px; border-radius: 8px; border: 1px solid #444; background: #1a1a2e; color: #fff; font-size: 14px; outline: none;">
+                        style="width:100%; padding: 10px 14px; border-radius: 8px; border: 1px solid #444; background: #1a1a2e; color: #fff; font-size: 14px; outline: none;">
                         <option value="">-- Chọn số tiền --</option>
                         <option value="10000">10.000đ</option>
                         <option value="20000">20.000đ</option>
@@ -74,7 +80,7 @@
                         alt="QR Thanh Toán Bank"
                         style="width: 220px; border-radius: 10px; border: 5px solid #fff; transition: opacity 0.3s;">
                     <p style="margin-top: 10px; font-size: 14px; color: #4CAF50;">Quét mã để nạp nhanh</p>
-                    <p id="qr-hint" style="font-size: 12px; color: #aaa; margin-top: 4px;">Nhập tên và chọn số tiền để QR tự điền nội dung</p>
+                    <p id="qr-hint" style="font-size: 12px; color: #aaa; margin-top: 4px;">Đăng nhập để QR tự điền nội dung</p>
                 </div>
                 <p style="font-size: 12px; color: #888;">* Tự động cộng tiền sau 1-5 phút chuyển khoản đúng nội dung.</p>
             </div>
@@ -191,51 +197,80 @@
             return s.toUpperCase();
         }
 
+        // Khởi tạo QR section dựa theo trạng thái đăng nhập
+        function initBankQR() {
+            const rawUsername = localStorage.getItem('mc_user') || '';
+            const loginWarn   = document.getElementById('qr-login-warn');
+            const controls    = document.getElementById('qr-controls');
+            const warnEl      = document.getElementById('qr-name-warn');
+            const infoDisplay = document.getElementById('qr-addinfo-display');
+            const fixedName   = document.getElementById('qr-fixed-name');
+
+            if (!rawUsername) {
+                // Chưa đăng nhập
+                loginWarn.style.display = 'block';
+                controls.style.display  = 'none';
+                warnEl.style.display    = 'none';
+                infoDisplay.textContent = 'NAP [Ten_In_Game]';
+                return;
+            }
+
+            loginWarn.style.display = 'none';
+            controls.style.display  = 'block';
+
+            const safeUsername = toBankSafe(rawUsername);
+            const addInfo      = `NAP ${safeUsername}`;
+            infoDisplay.textContent = addInfo;
+            fixedName.textContent   = addInfo;
+
+            // Cảnh báo nếu tên bị thay đổi
+            if (safeUsername !== rawUsername.toUpperCase()) {
+                warnEl.style.display = 'block';
+                warnEl.innerHTML = `⚠️ Tên trong game "<b>${rawUsername}</b>" sẽ hiển thị trong ngân hàng là "<b>${safeUsername}</b>" (ký tự đặc biệt bị thay bằng khoảng trắng). Hãy đảm bảo admin nhận ra tên này.`;
+            } else {
+                warnEl.style.display = 'none';
+            }
+
+            updateBankQR();
+        }
+
         function updateBankQR() {
-            const rawUsername  = document.getElementById('bank-username').value.trim();
-            const amount       = document.getElementById('bank-amount').value;
-            const img          = document.getElementById('bank-qr-img');
-            const hint         = document.getElementById('qr-hint');
-            const infoDisplay  = document.getElementById('qr-addinfo-display');
-            const warnEl       = document.getElementById('qr-name-warn');
+            const rawUsername = localStorage.getItem('mc_user') || '';
+            if (!rawUsername) return;
+
+            const amount      = document.getElementById('bank-amount').value;
+            const img         = document.getElementById('bank-qr-img');
+            const hint        = document.getElementById('qr-hint');
+            const infoDisplay = document.getElementById('qr-addinfo-display');
 
             const name    = 'NGUYEN VAN AN';
             const account = '0935420269';
             const bank    = 'MB';
 
-            // Tên chuẩn hoá theo chuẩn ngân hàng
-            const safeUsername = rawUsername ? toBankSafe(rawUsername) : '';
-            const addInfo = safeUsername ? `NAP ${safeUsername}` : 'NAP TEN_IN_GAME';
-            infoDisplay.textContent = safeUsername ? `NAP ${safeUsername}` : 'NAP [Ten_In_Game]';
-
-            // Cảnh báo nếu tên bị thay đổi so với tên gốc
-            if (rawUsername && safeUsername !== rawUsername.toUpperCase()) {
-                warnEl.style.display = 'block';
-                warnEl.innerHTML = `⚠️ Tên trong game "<b>${rawUsername}</b>" sẽ hiển thị trong ngân hàng là "<b>${safeUsername}</b>" (ký tự đặc biệt bị xoá/thay bằng khoảng trắng). Hãy đảm bảo admin nhận ra tên này.`;
-            } else {
-                warnEl.style.display = 'none';
-            }
+            const safeUsername = toBankSafe(rawUsername);
+            const addInfo      = `NAP ${safeUsername}`;
+            infoDisplay.textContent = addInfo;
 
             let url = `https://img.vietqr.io/image/${bank}-${account}-compact2.png?accountName=${encodeURIComponent(name)}&addInfo=${encodeURIComponent(addInfo)}`;
             if (amount) url += `&amount=${amount}`;
 
             img.style.opacity = '0.5';
             const newImg = new Image();
-            newImg.onload = () => { img.src = url; img.style.opacity = '1'; };
+            newImg.onload  = () => { img.src = url; img.style.opacity = '1'; };
             newImg.onerror = () => { img.style.opacity = '1'; };
             newImg.src = url;
 
-            if (safeUsername && amount) {
+            if (amount) {
                 hint.textContent = `✅ QR đã điền: ${addInfo} — ${Number(amount).toLocaleString()}đ`;
                 hint.style.color = '#4CAF50';
-            } else if (safeUsername) {
-                hint.textContent = `Đã điền tên: ${addInfo} — chọn số tiền để hoàn tất`;
-                hint.style.color = '#aaa';
             } else {
-                hint.textContent = 'Nhập tên và chọn số tiền để QR tự điền nội dung';
+                hint.textContent = 'Chọn số tiền để QR tự điền đầy đủ';
                 hint.style.color = '#aaa';
             }
         }
+
+        // Gọi khi trang load xong
+        document.addEventListener('DOMContentLoaded', initBankQR);
 
         document.getElementById('topupCardForm').addEventListener('submit', async function(e) {
             e.preventDefault();
